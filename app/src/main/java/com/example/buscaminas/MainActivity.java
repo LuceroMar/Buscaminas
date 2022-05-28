@@ -29,11 +29,14 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         setContentView(R.layout.activity_main);
 
         LinearLayout layout = (LinearLayout) findViewById(R.id.Layout1);
+
         fondo = new Tablero(this);
         fondo.setOnTouchListener(this);
         layout.addView(fondo);
         casillas = new Casillas[8][8];
+        //filas
         for (int i= 0; i < 8; i++) {
+            //columnas
             for (int c = 0; c < 8; c++) {
                 casillas[i][c] = new Casillas();
             }
@@ -65,8 +68,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     if (casillas[i][c].dentro((int) event.getX(),
                             (int) event.getY())) {
                         casillas[i][c].desocupada = true;
-                        if (casillas[i][c].contenido == 80) {
-                            Toast.makeText(this, "Has perdido",
+                        if (casillas[i][c].contenido == 60) {
+                            Toast.makeText(this, "HAS PERDIDO",
                                     Toast.LENGTH_LONG).show();
                             activo = false;
                         } else if (casillas[i][c].contenido == 0)
@@ -76,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 }
             }
         if (gano() && activo) {
-            Toast.makeText(this, "Has Ganado ", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "HAS GANADO ", Toast.LENGTH_LONG).show();
             activo = false;
         }
 
@@ -89,6 +92,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             super(context);
         }
         protected void onDraw(Canvas canvas){
+            //Canvas es una clase y paint es un objeto
             //color de fondo del jugo
             canvas.drawRGB(204,255 , 255);
             int ancho = 0;
@@ -102,6 +106,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             paint.setTextSize(30);
             Paint paint2 = new Paint();
             paint2.setTextSize(30);
+            //Typeface es una clase para el texto
             paint2.setTypeface(Typeface.DEFAULT_BOLD);
             //color de los numero de las casillas
             paint2.setARGB(255, 0, 0, 255);
